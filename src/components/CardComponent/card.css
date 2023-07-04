@@ -1,0 +1,15 @@
+.note-header-container {
+  display: grid;
+  text-align: left;
+  grid-template-columns: 0.5fr 1fr;
+}
+
+.amount-container {
+  font-size: 1.5em;
+}
+
+.name-container {
+  font-family: serif;
+  font-weight: bold;
+  font-size: 1.25em;
+}
