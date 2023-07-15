@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PaymentInfo from "./paymentInfo";
+import CustomerInfo from "./customerInfo";
 
 function Card() {
 
@@ -27,12 +29,25 @@ function Card() {
         console.log((error));
       });
   }, []);
-
+  //
+  // Make sure we have data to display...
+  //
+  if (!customerData) {
+    return (<p>Loading...</p>);
+  }
+  
   return (
     <>
-
-        // Put map function here to iterate through transactions
-      <p>Loading Card</p>
+      <PaymentInfo />
+      <CustomerInfo givenName = {customerData.customers[0]["given_name"]}
+      familyName = {customerData.customers[0]["family_name"]}
+      email = {customerData.customers[0]["email_address"]}
+      phoneNumber = {customerData.customers[0]["phone_number"]}
+      addressLine = {customerData.customers[0]["address"]["address_line_1"]}
+      city = {customerData.customers[0]["address"]["locality"]}
+      state = {customerData.customers[0]["address"]["administrative_district_level_1"]}
+      zipCode = {customerData.customers[0]["address"]["postal_code"]}
+      />
     </>
   );
 }

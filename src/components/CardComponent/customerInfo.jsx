@@ -6,12 +6,10 @@ import AircraftName from "../AircraftNameComponent/AircraftName.jsx";
 import TransactionID from "../TransactionIDComponent/TransactionID";
 import Address from "../AddressComponent/Address";
 import Amount from "../AmountComponent/Amount";
-// import SquarePaymentsData from "../../../src/data/payments.json";
-// import SquareCustomerData from "../../../src/data/customers.json";
 
-function CustomerInfo() {
+const CustomerInfo = ( customerData )  => {
 
-  const [customerData, setData] = useState(null);
+  // const [customerData, setData] = useState(null);
 
   // 
   // This code executes upon the rendering of the page.
@@ -22,39 +20,19 @@ function CustomerInfo() {
   //
   // Don't forget to use the map() function to iterate through the array.
 
-  useEffect(() => {
-    fetch("/getcustomers")
-      .then((res) => {
-        console.log(`Response code: ${res.status}`);
-        return res.json();
-      })
-      .then(data => {
-        console.log("And heres the data: " + data);
-        setData(data);
-      })
-      .catch((error) => {
-        console.log((error));
-      });
-  }, []);
+  const { givenName, familyName, email, phoneNumber, addressLine, city, state, zipCode } = customerData
 
-  //
-  // Make sure we have data to display...
-  //
-  if (!customerData) {
-    return (<p>Loading...</p>);
-  }
-
-  const SquareTransID = customerData.customers[0]["id"];
-  const SquareTransDate = customerData.customers[0]["created_at"];
+  const SquareTransID = "123456";
+  const SquareTransDate = "created_at";
   const SquareCash = "150";
-  const SquareGivenName = customerData.customers[0]["given_name"];
-  const SquareFamilyName = customerData.customers[0]["family_name"];
-  const SquareEmail = customerData.customers[0]["email_address"];
-  const SquarePhoneNumber = customerData.customers[0]["phone_number"];
-  const SquareAddressLine = customerData.customers[0]["address"]["address_line_1"];
-  const SquareLocality = customerData.customers[0]["address"]["locality"];
-  const SquareAdministrativeDistrictLevel1 = customerData.customers[0]["address"]["administrative_district_level_1"];
-  const SquarePostalCode = customerData.customers[0]["address"]["postal_code"];
+  // const SquareGivenName = customerData.customers[0]["given_name"];
+  // const SquareFamilyName = customerData.customers[0]["family_name"];
+  // const SquareEmail = customerData.customers[0]["email_address"];
+  // const SquarePhoneNumber = customerData.customers[0]["phone_number"];
+  // const SquareAddressLine = customerData.customers[0]["address"]["address_line_1"];
+  // const SquareLocality = customerData.customers[0]["address"]["locality"];
+  // const SquareAdministrativeDistrictLevel1 = customerData.customers[0]["address"]["administrative_district_level_1"];
+  // const SquarePostalCode = customerData.customers[0]["address"]["postal_code"];
 
   return (
     <>
@@ -67,15 +45,15 @@ function CustomerInfo() {
         <Amount cash={SquareCash} />
       </div>
       <div className="name-container">
-        <CustomerName FirstName={SquareGivenName} LastName={SquareFamilyName} />
+        <CustomerName FirstName={givenName} LastName={familyName} />
       </div>
       <Address
-        street={SquareAddressLine}
-        city={SquareLocality}
-        state={SquareAdministrativeDistrictLevel1}
-        zip={SquarePostalCode}
-        email={SquareEmail}
-        phone={SquarePhoneNumber}
+        street={addressLine}
+        city={city}
+        state={state}
+        zip={zipCode}
+        email={email}
+        phone={phoneNumber}
       />
     </>
   );
